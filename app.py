@@ -208,43 +208,6 @@ def generar_qr(url):
     img = qr.make_image(fill_color="#FF69B4", back_color="white")
     return img
 
-# --- SECCIÓN DE PEDIDO DINÁMICO POR WHATSAPP ---
-st.sidebar.markdown("---")
-st.sidebar.write("### 🛒 Realiza tu pedido")
-
-if st.session_state.carrito:
-    # 1. Agrupar productos para que no se repitan (Ej: "2x Hamburguesa")
-    resumen_pedido = ""
-    total_pedido = 0
-    
-    # Contamos cuántas veces aparece cada item en el carrito
-    conteo_items = {item: st.session_state.carrito.count(item) for item in set(st.session_state.carrito)}
-    
-    for item, cantidad in conteo_items.items():
-        precio_unitario = precios.get(item, 0)
-        subtotal_item = precio_unitario * cantidad
-        resumen_pedido += f"- {cantidad}x {item} (C${subtotal_item:.2f})%0A"
-        total_pedido += subtotal_item
-
-    # 2. Configurar el mensaje final
-    total_con_iva = total_pedido * 1.15
-    mi_numero = "50585289131"
-    mensaje_base = f"¡Hola! 👑 Me gustaría pedir:%0A{resumen_pedido}%0A*Total con IVA: C${total_con_iva:.2f}*%0A¿Me confirman el pedido?"
-    
-    # Botón dinámico
-    st.sidebar.markdown(f"""
-        <a href="https://wa.me/{mi_numero}?text={mensaje_base}" target="_blank" style="text-decoration: none;">
-            <button style="width: 100%; background-color: #25D366; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer;">
-                🟢 Enviar Pedido a WhatsApp
-            </button>
-        </a>
-    """, unsafe_allow_html=True)
-else:
-    st.sidebar.info("Agrega algo al menú para habilitar el pedido.")
-# Configura tu número aquí (505 + tu número de Nicaragua)
-mi_numero = "50585289131" # <--- ¡Pon tu número real aquí!
-mensaje_wa = "¡Hola!Me gustaría realizar un pedido de Burguer's Queen. ¿Me podrían atender?"
-mensaje_url = mensaje_wa.replace(" ", "%20")
 
 
 
