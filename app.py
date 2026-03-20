@@ -1,4 +1,7 @@
 import streamlit as st
+import qrcode             # <-- ESTA ES LA QUE FALTA
+from io import BytesIO    # Para manejar la imagen en memoria
+from PIL import Image     # Para procesar la imagen del QR
 
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Burguer's Queen", page_icon="👑", layout="wide")
@@ -156,6 +159,30 @@ elif opcion == "Mi Pedido":
             st.success(f"¡Pedido de C${total:.2f} enviado!")
             st.session_state.carrito = []
 
+# --- GENERACIÓN DE QR (Agrégalo aquí) ---
+
+# 1. Definir la función (puede ir al principio o aquí mismo)
+def generar_qr(url):
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="#FF69B4", back_color="white")
+    return img
+
+# 2. Lógica para mostrarlo en la barra lateral
+st.sidebar.markdown("---")
+st.sidebar.write("### 📱 ¡Comparte el Menú!")
+
+# REEMPLAZA ESTO con tu URL real cuando Streamlit te la dé
+url_app = "https://burguers-queen.streamlit.app" 
+
+if st.sidebar.button("Generar Código QR Real"):
+    img_qr = generar_qr(url_app)
+    
+    # Preparar la imagen para Streamlit
+    buf = BytesIO()
+    img_qr.save(buf, format="PNG")
+    st.sidebar.image(buf, caption="Escanea para compartir el banquete")
 
 # 5. PIE DE PÁGINA 
 st.markdown("""
