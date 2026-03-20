@@ -214,29 +214,14 @@ if st.sidebar.button("Generar Código QR Real"):
     st.sidebar.image(buf, caption="Escanea para compartir el banquete")
 
 # 5. PIE DE PÁGINA 
-st.markdown("""
-    <style>
-    .footer-real {
-        background: linear-gradient(90deg, #FFC0CB, #FF69B4);
-        color: white;
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-        font-family: 'Courier New', Courier, monospace;
-        margin-top: 50px;
-    }
-    /* Cambio del color del enlace (WhatsApp) a blanco */
-    .footer-real a { 
-        color: white !important; 
-        text-decoration: underline; 
-        font-weight: bold; 
-    }
-    </style>
-    
-    <div class="footer-real">
-        <h4>📍 Ubicación: Calle Real del Castillo, Rivas</h4>
-        <h4>⏰ Horario: 11:00 AM - 10:00 PM</h4>
-        <h4>📱 WhatsApp: <a href="https://wa.me/50585289131" target="_blank">+505 8528-9131</a></h4>
-        <p style="font-size: 0.8rem; margin-top: 15px;">© 2026 Burguer's Queen - Sabores de Leyenda</p>
+st.markdown(
+    """
+    <div style="background-color: #FF69B4; padding: 20px; border-radius: 10px; text-align: center; color: white;">
+        <p>📍 Ubicación: Calle Real del Castillo, Rivas</p>
+        <p>⏰ Horario: 11:00 AM - 10:00 PM</p>
+        <hr>
+        <p style="font-size: 0.8em;">© 2026 Burguer's Queen - Sabores de Leyenda</p>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
