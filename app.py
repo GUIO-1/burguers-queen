@@ -156,7 +156,23 @@ elif opcion == "Mi Pedido":
             st.write(f"IVA (15%): C${iva:.2f}")
             st.metric("Total Final", f"C${total:.2f}")
         
+        # --- SUSTITUCIÓN DEL BOTÓN DE CONFIRMAR ---
+        st.divider()
+        
+        # 1. Preparar el mensaje detallado (igual que en la barra lateral)
+        resumen_pedido = ""
+        total_pedido = 0
+        conteo_items = {item: st.session_state.carrito.count(item) for item in set(st.session_state.carrito)}
+        
+        for item, cantidad in conteo_items.items():
+            precio_unitario = precios.get(item, 0)
+            subtotal_item = precio_unitario * cantidad
+            resumen_pedido += f"- {cantidad}x {item} (C${subtotal_item:.2f})%0A"
+            total_pedido += subtotal_item
 
+        total_con_iva = total_pedido * 1.15
+        mensaje_base = f"¡Hola! 👑 Me gustaría pedir:%0A{resumen_pedido}%0A*Total con IVA: C${total_con_iva:.2f}*%0A¿Me confirman el pedido?"
+        
         # 2. El nuevo botón de acción final
         st.markdown(f"""
             <a href="https://wa.me/{mi_numero}?text={mensaje_base}" target="_blank" style="text-decoration: none;">
