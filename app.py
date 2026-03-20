@@ -196,7 +196,7 @@ if st.session_state.carrito:
     st.sidebar.markdown(f"""
         <a href="https://wa.me/{mi_numero}?text={mensaje_base}" target="_blank" style="text-decoration: none;">
             <button style="width: 100%; background-color: #25D366; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer;">
-                🟢 Enviar Pedido Detallado
+                🟢 Enviar Pedido a WhatsApp
             </button>
         </a>
     """, unsafe_allow_html=True)
@@ -204,28 +204,11 @@ else:
     st.sidebar.info("Agrega algo al menú para habilitar el pedido.")
 # Configura tu número aquí (505 + tu número de Nicaragua)
 mi_numero = "50585289131" # <--- ¡Pon tu número real aquí!
-mensaje_wa = "¡Hola! Me gustaría realizar un pedido de Burguer's Queen. ¿Me podrían atender?"
+mensaje_wa = "¡Hola!Me gustaría realizar un pedido de Burguer's Queen. ¿Me podrían atender?"
 mensaje_url = mensaje_wa.replace(" ", "%20")
 
-# Botón con estilo WhatsApp
-st.sidebar.markdown(f"""
-    <a href="https://wa.me/{mi_numero}?text={mensaje_url}" target="_blank" style="text-decoration: none;">
-        <button style="
-            width: 100%;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
-            🟢 Pedir por WhatsApp
-        </button>
-    </a>
-""", unsafe_allow_html=True)
+
+
 
 # 2. Lógica para mostrarlo en la barra lateral
 st.sidebar.markdown("---")
