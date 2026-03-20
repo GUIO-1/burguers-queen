@@ -2,6 +2,8 @@ import streamlit as st
 import qrcode             # <-- ESTA ES LA QUE FALTA
 from io import BytesIO    # Para manejar la imagen en memoria
 from PIL import Image     # Para procesar la imagen del QR
+# --- CONFIGURACIÓN GLOBAL ---
+mi_numero = "50585289131"
 
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Burguer's Queen", page_icon="👑", layout="wide")
@@ -195,7 +197,7 @@ elif opcion == "Mi Pedido":
         if st.button("Limpiar mi Alforja Real"):
             st.session_state.carrito = []
             st.rerun()
-            
+
 # --- GENERACIÓN DE QR (Agrégalo aquí) ---
 
 # 1. Definir la función (puede ir al principio o aquí mismo)
