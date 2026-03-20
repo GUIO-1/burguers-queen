@@ -203,7 +203,7 @@ st.sidebar.markdown("---")
 st.sidebar.write("### 📱 ¡Comparte el Menú!")
 
 # REEMPLAZA ESTO con tu URL real cuando Streamlit te la dé
-url_app = "https://burguers-queen.streamlit.app" 
+url_app = "https://burguers-queen-fkrsezj2ykgama4s3krkjg.streamlit.app/" 
 
 if st.sidebar.button("Generar Código QR Real"):
     img_qr = generar_qr(url_app)
