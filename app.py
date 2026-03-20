@@ -193,6 +193,7 @@ elif opcion == "Mi Pedido":
             <br>
         """, unsafe_allow_html=True)
         
+        
         # Botón opcional para limpiar la alforja después de pedir
         if st.button("Limpiar mi Alforja Real"):
             st.session_state.carrito = []
