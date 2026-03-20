@@ -154,11 +154,48 @@ elif opcion == "Mi Pedido":
             st.write(f"IVA (15%): C${iva:.2f}")
             st.metric("Total Final", f"C${total:.2f}")
         
-        if st.button("Confirmar Pedido"):
-            st.balloons()
-            st.success(f"¡Pedido de C${total:.2f} enviado!")
-            st.session_state.carrito = []
+        # --- SUSTITUCIÓN DEL BOTÓN DE CONFIRMAR ---
+        st.divider()
+        
+        # 1. Preparar el mensaje detallado (igual que en la barra lateral)
+        resumen_pedido = ""
+        total_pedido = 0
+        conteo_items = {item: st.session_state.carrito.count(item) for item in set(st.session_state.carrito)}
+        
+        for item, cantidad in conteo_items.items():
+            precio_unitario = precios.get(item, 0)
+            subtotal_item = precio_unitario * cantidad
+            resumen_pedido += f"- {cantidad}x {item} (C${subtotal_item:.2f})%0A"
+            total_pedido += subtotal_item
 
+        total_con_iva = total_pedido * 1.15
+        mensaje_base = f"¡Hola! 👑 Me gustaría pedir:%0A{resumen_pedido}%0A*Total con IVA: C${total_con_iva:.2f}*%0A¿Me confirman el pedido?"
+        
+        # 2. El nuevo botón de acción final
+        st.markdown(f"""
+            <a href="https://wa.me/{mi_numero}?text={mensaje_base}" target="_blank" style="text-decoration: none;">
+                <button style="
+                    width: 100%;
+                    background-color: #25D366;
+                    color: white;
+                    border: none;
+                    padding: 15px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    font-size: 18px;
+                    cursor: pointer;
+                    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+                    📲 Enviar Pedido por WhatsApp
+                </button>
+            </a>
+            <br>
+        """, unsafe_allow_html=True)
+        
+        # Botón opcional para limpiar la alforja después de pedir
+        if st.button("Limpiar mi Alforja Real"):
+            st.session_state.carrito = []
+            st.rerun()
+            
 # --- GENERACIÓN DE QR (Agrégalo aquí) ---
 
 # 1. Definir la función (puede ir al principio o aquí mismo)
